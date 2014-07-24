@@ -1,14 +1,13 @@
-var fs = require('fs');
-var path = require('path');
-
-    var add = process.argv[2];
-    var type = '.' + process.argv[3];
+var path = process.argv[2]
+var filter = process.argv[3]
+var filterModule = require('./directory.js')
 
 
-    fs.readdir(add, function(err, list) {
-        for (var i=0; i<list.length; i++) {
-            if (path.extname(list[i])===type) {
-                console.log(list[i]);
-            }
+    filterModule(path, filter, function (err, list) {
+        if (err) {
+            return console.error('Error:', err);
         }
+        list.forEach(function (file) {
+        console.log(file)
+        })
     });
